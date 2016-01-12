@@ -11,17 +11,47 @@ pids
 lib-cov
 
 # Coverage directory used by tools like istanbul
-coverage
+coverage/
+# Reports directory used by tools like protractor
+reports/
 
-# Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
+# Build
+build/
+dist/
+.tmp
+
+# Vendor files
+node_modules/
+bower_components
+vendor
+
+# Temp directories
+temp/
+test/tmp
+test/temp
+
+# Other temp
+.sass-cache
 .grunt
 
-# node-waf configuration
-.lock-wscript
+# Shippable directory
+shippable/
 
-# Compiled binary addons (http://nodejs.org/api/addons.html)
-build/Release
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 
-# Dependency directory
-# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
-node_modules
+# Cordova
+platforms/
+plugins/
+
+# Visual Studio Code
+.vscode/
+
+# Changelog
+CHANGELOG.md

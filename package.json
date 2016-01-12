@@ -1,0 +1,58 @@
+{
+    "name": "awl",
+    "description": "awl",
+    "version": "0.0.1",
+    "license": "UNLICENSED",
+    "scripts": {
+        "test": "gulp test",
+        "jsbeautify": "js-beautify client/**/*.js client/*.js -r",
+        "protractor_debug_1": "./node_modules/protractor/bin/webdriver-manager start",
+        "protractor_debug_2": "./node_modules/protractor/bin/elementexplorer.js http://localhost:5000"
+    },
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "dependencies": {
+        "angular": "^1.4.6",
+        "angular-animate": "^1.4.6",
+        "angular-mocks": "^1.4.6",
+        "angular-resource": "^1.4.6",
+        "angular-sanitize": "^1.4.6",
+        "angular-ui-router": "^0.2.15",
+        "ionic-sdk":"^1.1.0",
+        "font-awesome": "^4.4.0",
+        "ng-cordova": "^0.1.23-alpha",
+        "angular-ui-bootstrap": "^0.14.3",
+        "angular-material": "^0.11.0",
+        "bootstrap": "3.3.5"
+    },
+    "devDependencies": {
+    },
+    "engines": {
+        "node": ">=0.10.0"
+    },
+    "browser": {
+        "unitHelper": "./test/unit/unitHelper.js",
+        "lbServices": "./client/scripts/lbServices.js",
+        "ionic": "ionic-sdk/release/js/ionic.js",
+        "ionic-angular": "ionic-sdk/release/js/ionic-angular.js"
+    },
+    "browserify": {
+        "transform": [
+            ["babelify", { "stage": 0, "optional": ["es7.asyncFunctions", "runtime"], "ignore": ["./node_modules", "./bower_components"]}],
+            "html2js-browserify",
+            "cssify",
+            "browserify-shim",
+            "brfs"
+        ]
+    },
+    "browserify-shim": {
+        "lbServices": {
+            "depends": [
+            "angular-resource"
+            ]
+        }
+
+    }
+}

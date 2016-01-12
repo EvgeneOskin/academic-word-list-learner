@@ -1,0 +1,13 @@
+{
+  "generator-mcfly": {
+    "filenameCase": "camel",
+    "filenameSuffix": true,
+    "appname": "awl",
+    "clientFolder": "client",
+    "ionic": true,
+    "ngCordova": true,
+    "fontawesome": true,
+    "bootstrap": true,
+    "material": true
+  }
+}
