@@ -41,9 +41,10 @@ function SublistController($scope, $stateParams, $state) {
     $scope.shouldShowReorder = false;
     $scope.listCanSwipe = true;
     $scope.sublistId = $stateParams.sublistId;
-    $scope.items = awlList[$scope.sublistId].words.map(
+    var sublist = awlList[$scope.sublistId];
+    $scope.items = sublist.words.map(
         function(value) {
-            return {word: value, en: value, ru: value}
+            return {word: value, en: value, ru: sublist.ru[sublist.words.indexOf(value)]}
         }
     );
     $scope.toSublists = function(){

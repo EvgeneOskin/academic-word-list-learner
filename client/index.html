@@ -16,14 +16,12 @@
 
 <body class="platform-cordova" layout="column" flex>
     <ion-nav-bar>
-      <ion-nav-back-button>
-      </ion-nav-back-button>
     </ion-nav-bar>
 
     <ion-nav-view name="sublist"></ion-nav-view>
 
     <script id="templates/sublists.html" type="text/ng-template">
-      <ion-view view-title="Sublists" can-swipe-back="false">
+      <ion-view view-title="Sublists">
         <ion-content>
           <ion-list
             show-delete="shouldShowDelete"
@@ -41,7 +39,7 @@
 
     <script id="templates/sublist.html" type="text/ng-template">
       <ion-view view-title="Sublist {{sublistId}}">
-        <ion-nav-buttons side="right">
+        <ion-nav-buttons side="primiry">
           <button class="button" ng-click="toSublists()">
             Sublists
           </button>
