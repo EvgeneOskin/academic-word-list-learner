@@ -13,6 +13,7 @@ require('ionic');
 require('ionic-angular');
 require('angular-material');
 require('angular-ui-bootstrap');
+var awlList = require('./awl');
 var app = angular.module(namespace, ['ionic', 'ngMaterial', 'ui.bootstrap',
     // inject:modules start
     // inject:modules end
@@ -27,11 +28,58 @@ if (process.env.SENTRY_MODE === 'prod') {
     app.config(configCompile);
 }
 
+function SublistsController($scope) {
+    $scope.shouldShowDelete = false;
+    $scope.shouldShowReorder = false;
+    $scope.listCanSwipe = true;
+    $scope.items = awlList;
+};
+SublistsController.$inject = ['$scope'];
+
+function SublistController($scope, $stateParams, $state) {
+    $scope.shouldShowDelete = false;
+    $scope.shouldShowReorder = false;
+    $scope.listCanSwipe = true;
+    $scope.sublistId = $stateParams.sublistId;
+    var sublist = awlList[$scope.sublistId];
+    $scope.items = sublist.words.map(
+        function(value) {
+            return {word: value, en: value, ru: sublist.ru[sublist.words.indexOf(value)]}
+        }
+    );
+    $scope.toSublists = function(){
+        $state.go('sublist')
+    };
+};
+SublistController.$inject = ['$scope', "$stateParams", "$state"];
+
+
+function configRouting($stateProvider, $urlRouterProvider) {
+    $stateProvider
+    .state('sublist', {
+        url: "/sublist",
+        views: {
+            sublist: {
+                templateUrl: "templates/sublists.html",
+                controller: 'SublistsController'
+            }
+        }
+    })
+    .state('sublist-detail', {
+        url: `/sublist/:sublistId`,
+        views: {
+            sublist: {
+                templateUrl: "templates/sublist.html",
+                controller: 'SublistController'
+            }
+        }
+    });
+    $urlRouterProvider.otherwise('/sublist');
+};
+configRouting.$inject = ['$stateProvider', '$urlRouterProvider'];
 var runDeps = ['$ionicPlatform', '$window'];
 var run = function($ionicPlatform, $window) {
     $ionicPlatform.ready(function() {
-        // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-        // for form inputs)
         if ($window.cordova && $window.cordova.plugins.Keyboard) {
             $window.cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
         }
@@ -43,8 +91,11 @@ var run = function($ionicPlatform, $window) {
         }
     });
 };
-
 run.$inject = runDeps;
-app.run(run);
 
+app
+.controller('SublistController', SublistController)
+.controller('SublistsController', SublistsController)
+.config(configRouting)
+.run(run);
 module.exports = app;

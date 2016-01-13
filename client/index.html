@@ -10,17 +10,54 @@
     <!--[if IE]>
     <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
     <![endif]-->
-    <title>Sample app</title>
+    <title>AWL app</title>
     <link rel="stylesheet" href="styles/main.css">
 </head>
 
-<body class="platform-cordova"layout="column" flex>
-    <!--[if lt IE 7]>
-            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-    <![endif]-->
-    <ui-view layout="column" flex></ui-view>
-    
+<body class="platform-cordova" layout="column" flex>
+    <ion-nav-bar>
+    </ion-nav-bar>
+
+    <ion-nav-view name="sublist"></ion-nav-view>
+
+    <script id="templates/sublists.html" type="text/ng-template">
+      <ion-view view-title="Sublists">
+        <ion-content>
+          <ion-list
+            show-delete="shouldShowDelete"
+            show-reorder="shouldShowReorder"
+            can-swipe="listCanSwipe">
+            <ion-item ng-repeat="item in items">
+              <a href="#/sublist/{{item.sublist}}">
+                <h2>Sublist {{item.sublist}}</h2>
+              </a>
+            </ion-item>
+          </ion-list>
+        </ion-content>
+      </ion-view>
+    </script>
+
+    <script id="templates/sublist.html" type="text/ng-template">
+      <ion-view view-title="Sublist {{sublistId}}">
+        <ion-nav-buttons side="primiry">
+          <button class="button" ng-click="toSublists()">
+            Sublists
+          </button>
+        </ion-nav-buttons>
+        <ion-content>
+          <ion-list
+            can-swipe="listCanSwipe">
+            <ion-item ng-repeat="item in items">
+              <h2>{{ item.word }}</h2>
+              <ion-option-button class="button-positive">
+                {{ item.ru }}
+              </ion-option-button>
+            </ion-item>
+          </ion-list>
+        </ion-content>
+      </ion-view>
+    </script>
     <script src="scripts/bundle.js"></script>
-</body>
+  </body>
 
 </html>
