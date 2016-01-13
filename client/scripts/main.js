@@ -13,6 +13,7 @@ require('ionic');
 require('ionic-angular');
 require('angular-material');
 require('angular-ui-bootstrap');
+var awlList = require('./awl');
 var app = angular.module(namespace, ['ionic', 'ngMaterial', 'ui.bootstrap',
     // inject:modules start
     // inject:modules end
@@ -31,11 +32,7 @@ function MyCtrl($scope) {
     $scope.shouldShowDelete = false;
     $scope.shouldShowReorder = false;
     $scope.listCanSwipe = true;
-    $scope.items = [
-        {"title": "1", "description": "Test"},
-        {"title": "2", "description": "Test"},
-        {"title": "3", "description": "Test"}
-    ];
+    $scope.items = awlList;
 }
 MyCtrl.$inject = ['$scope'];
 
@@ -59,6 +56,8 @@ var run = function($ionicPlatform, $window) {
 
     });
 };
+
+
 
 run.$inject = runDeps;
 app.run(run);

@@ -10,7 +10,7 @@
     <!--[if IE]>
     <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
     <![endif]-->
-    <title>Sample app</title>
+    <title>AWL app</title>
     <link rel="stylesheet" href="styles/main.css">
 </head>
 
@@ -18,24 +18,9 @@
     <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
     <![endif]-->
-    <ion-list ng-controller="MyCtrl"
-      show-delete="shouldShowDelete"
-      show-reorder="shouldShowReorder"
-      can-swipe="listCanSwipe">
+    <ion-list ng-controller="MyCtrl">
       <ion-item ng-repeat="item in items">
-        <h2>{{item.title}}</h2>
-        <p>{{item.description}}</p>
-        <ion-option-button class="button-positive"
-          ng-click="share(item)">
-          Share
-        </ion-option-button>
-        <ion-option-button class="button-info"
-          ng-click="edit(item)">
-          Edit
-        </ion-option-button>
-        <ion-delete-button class="ion-minus-circled"
-          ng-click="items.splice($index, 1)">
-        </ion-delete-button>
+        <h2>Sublist {{item.sublist}}</h2>
         <ion-reorder-button class="ion-navicon"
           on-reorder="reorderItem(item, $fromIndex, $toIndex)">
         </ion-reorder-button>
