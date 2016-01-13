@@ -27,6 +27,20 @@ if (process.env.SENTRY_MODE === 'prod') {
     app.config(configCompile);
 }
 
+function MyCtrl($scope) {
+    $scope.shouldShowDelete = false;
+    $scope.shouldShowReorder = false;
+    $scope.listCanSwipe = true;
+    $scope.items = [
+        {"title": "1", "description": "Test"},
+        {"title": "2", "description": "Test"},
+        {"title": "3", "description": "Test"}
+    ];
+}
+MyCtrl.$inject = ['$scope'];
+
+app.controller('MyCtrl', MyCtrl);
+
 var runDeps = ['$ionicPlatform', '$window'];
 var run = function($ionicPlatform, $window) {
     $ionicPlatform.ready(function() {
@@ -41,10 +55,12 @@ var run = function($ionicPlatform, $window) {
         if ($window.TestFairy) {
             $window.TestFairy.begin(process.env.TESTFAIRY_IOS_APP_TOKEN);
         }
+
+
     });
 };
 
 run.$inject = runDeps;
 app.run(run);
-
 module.exports = app;
+

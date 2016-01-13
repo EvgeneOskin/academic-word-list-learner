@@ -14,13 +14,36 @@
     <link rel="stylesheet" href="styles/main.css">
 </head>
 
-<body class="platform-cordova"layout="column" flex>
+<body class="platform-cordova" layout="column" flex>
     <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
     <![endif]-->
-    <ui-view layout="column" flex></ui-view>
-    
+    <ion-list ng-controller="MyCtrl"
+      show-delete="shouldShowDelete"
+      show-reorder="shouldShowReorder"
+      can-swipe="listCanSwipe">
+      <ion-item ng-repeat="item in items">
+        <h2>{{item.title}}</h2>
+        <p>{{item.description}}</p>
+        <ion-option-button class="button-positive"
+          ng-click="share(item)">
+          Share
+        </ion-option-button>
+        <ion-option-button class="button-info"
+          ng-click="edit(item)">
+          Edit
+        </ion-option-button>
+        <ion-delete-button class="ion-minus-circled"
+          ng-click="items.splice($index, 1)">
+        </ion-delete-button>
+        <ion-reorder-button class="ion-navicon"
+          on-reorder="reorderItem(item, $fromIndex, $toIndex)">
+        </ion-reorder-button>
+
+      </ion-item>
+    </ion-list>
+
     <script src="scripts/bundle.js"></script>
-</body>
+  </body>
 
 </html>
